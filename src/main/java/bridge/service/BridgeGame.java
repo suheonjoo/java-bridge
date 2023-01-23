@@ -36,7 +36,7 @@ public class BridgeGame {
 	}
 
 	public void move(String userLocation) {
-		Integer userCurrentIndex = findUserLocation();
+		Integer userCurrentIndex = findUserCurrentIndex();
 		if (!bridge.checkValidSpace(userLocation, userCurrentIndex)) {
 			userBridgeRepository.saveUserWrongSpace(userLocation);
 			return;
@@ -57,7 +57,7 @@ public class BridgeGame {
 		return result.findFinalResultToString();
 	}
 
-	public Integer findUserLocation() {
+	public Integer findUserCurrentIndex() {
 		return userBridgeRepository.findUserCurrentIndex();
 	}
 
