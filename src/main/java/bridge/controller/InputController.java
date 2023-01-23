@@ -2,45 +2,30 @@ package bridge.controller;
 
 import bridge.service.InputValidService;
 import bridge.view.InputView;
-import bridge.view.OutputView;
 
 public class InputController {
 
 	private final InputView inputView;
 	private final InputValidService inputValidService;
-	private final OutputView outputView;
+	private final InputTemplate inputTemplate;
 
-	public InputController(InputView inputView, InputValidService inputValidService, OutputView outputView) {
+	public InputController(InputView inputView, InputValidService inputValidService,
+		InputTemplate inputTemplate) {
 		this.inputView = inputView;
 		this.inputValidService = inputValidService;
-		this.outputView = outputView;
+		this.inputTemplate = inputTemplate;
 	}
 
 	public Integer getBridgeSize() {
-		try {
-			return inputValidService.validBridgeSize(inputView.readBridgeSize());
-		} catch (IllegalArgumentException e) {
-			outputView.printError(e.getMessage());
-			return getBridgeSize();
-		}
+		return (Integer)inputTemplate.call(() -> inputValidService.validBridgeSize(inputView.readBridgeSize()));
 	}
 
 	public String getUserMoving() {
-		try {
-			return inputValidService.validUserMoving(inputView.readMoving());
-		} catch (IllegalArgumentException e) {
-			outputView.printError(e.getMessage());
-			return getUserMoving();
-		}
+		return (String)inputTemplate.call(() -> inputValidService.validUserMoving(inputView.readMoving()));
 	}
 
 	public String getUserRestartCommand() {
-		try {
-			return inputValidService.validUserCommand(inputView.readGameCommand());
-		} catch (IllegalArgumentException e) {
-			outputView.printError(e.getMessage());
-			return getUserRestartCommand();
-		}
+		return (String)inputTemplate.call(() -> inputValidService.validUserCommand(inputView.readGameCommand()));
 	}
 
 }
