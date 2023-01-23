@@ -17,15 +17,15 @@ public class InputController {
 	}
 
 	public Integer getBridgeSize() {
-		return (Integer)inputTemplate.call(() -> inputValidService.validBridgeSize(inputView.readBridgeSize()));
+		return inputTemplate.call(() -> inputValidService.validBridgeSize(inputView.readBridgeSize()));
 	}
 
 	public String getUserMoving() {
-		return (String)inputTemplate.call(() -> inputValidService.validUserMoving(inputView.readMoving()));
+		return inputTemplate.call(() -> inputValidService.validUserMoving(inputView.readMoving()));
 	}
 
 	public String getUserRestartCommand() {
-		return (String)inputTemplate.call(() -> inputValidService.validUserCommand(inputView.readGameCommand()));
+		return inputTemplate.call(() -> inputValidService.validUserCommand(inputView.readGameCommand()));
 	}
 
 }

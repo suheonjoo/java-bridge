@@ -12,7 +12,7 @@ public class InputTemplate {
 		this.outputView = outputView;
 	}
 
-	public Object call(Supplier serverStartCallback) {
+	public <T> T call(Supplier<T> serverStartCallback) {
 		try {
 			return serverStartCallback.get();
 		} catch (IllegalArgumentException e) {
